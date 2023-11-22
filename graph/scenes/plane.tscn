@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b14funl7ad63b"]
+
+[ext_resource type="PackedScene" uid="uid://bom12kuevlytg" path="res://art/plane.glb" id="1_7mck6"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(0.989666, 0, 0.143389, 0, 1, 0, -0.143389, 0, 0.989666, 0, 0, 0)
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="plane" parent="Pivot" instance=ExtResource("1_7mck6")]
+transform = Transform3D(0.990454, 0, -0.137842, 0, 1, 0, 0.137842, 0, 0.990454, 0, 0, 0)
