@@ -1,11 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://b14funl7ad63b"]
+[gd_scene load_steps=4 format=3 uid="uid://b14funl7ad63b"]
 
 [ext_resource type="PackedScene" uid="uid://bom12kuevlytg" path="res://art/plane.glb" id="1_7mck6"]
+[ext_resource type="Script" path="res://scripts/plane.gd" id="1_kcnqw"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_v4ht5"]
+size = Vector3(5.5504, 1, 1)
+
+[node name="PlanePlayer" type="CharacterBody3D" node_paths=PackedStringArray("player_model", "camera")]
 transform = Transform3D(0.989666, 0, 0.143389, 0, 1, 0, -0.143389, 0, 0.989666, 0, 0, 0)
+script = ExtResource("1_kcnqw")
+speed = null
+turn_speed = null
+elevation_speed = null
+roll_angle = null
+pitch_angle = null
+player_model = NodePath("Pivot/plane")
+camera = NodePath("Camera3D")
+cam_offset = null
+cam_look_offset = null
 
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="plane" parent="Pivot" instance=ExtResource("1_7mck6")]
 transform = Transform3D(0.990454, 0, -0.137842, 0, 1, 0, 0.137842, 0, 0.990454, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_v4ht5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
