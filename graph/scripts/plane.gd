@@ -1,45 +1,51 @@
-extends CharacterBody3D
+extends Node3D
+
+@export var speed : float = 2
+@export var turn_speed : float = 5
+@export var elevation_speed : float = 2
+@export var roll_angle : float = 30
+@export var pitch_angle : float = 30
+@export var player_graphic : Node3D
+@export var camera : Node3D
+@export var cam_offset : Vector3
+@export var cam_look_offset : Vector3
+
+# smoothed input state
+var current_roll_t : float
+var curr_smooth_roll_vel : float
+var current_turn_t : float
+var curr_smooth_turn_vel : float
+var current_pitch_angle : float
+var curr_pitch_t : float
+var curr_smooth_pitch_vel : float
 
 
-@export var speed: float = 2
-@export var turn_speed: float = 5
-@export var elevation_speed: float = 4
-@export var roll_angle: float = 30
-@export var pitch_angle: float = 30
-@export var player_model: Node3D
-@export var camera: Node3D
-@export var cam_offset: Vector3
-@export var cam_look_offset: Vector3
 
-#smoothed input state
-var current_roll_t: float
-var curr_smooth_roll_vel: float
-var current_turn_t: float
-var curr_smooth_turn_vel: float
-var current_pitch_angle: float
-var curr_pitch_t: float
-var curr_smooth_pitch_vel: float
+func _ready():
+	pass 
+
 
 func _process(delta):
+	# Update smoothed inputs
 	handle_inputs(delta)
-	# move
+	# Move
 	var velocity_local = Vector3(0, -curr_pitch_t * elevation_speed, speed)
 	translate_object_local(velocity_local * delta)
-
-	# rotate
-	rotate(Vector3(0, -1, 0), turn_speed * current_turn_t * delta)
-
-	#rotate model
+	# Rotate
+	rotate(Vector3(0,-1,0), turn_speed * current_turn_t * delta)
+	# Rotate graphic
+	
 	var target_pitch_angle = curr_pitch_t * deg_to_rad(pitch_angle)
 	current_pitch_angle = lerp(current_pitch_angle, target_pitch_angle, delta * 8)
-	player_model.rotation = Vector3.ZERO
-	player_model.rotate(Vector3.FORWARD, -current_roll_t * deg_to_rad(roll_angle))
+	player_graphic.rotation = Vector3.ZERO
+	player_graphic.rotate(Vector3.FORWARD, -current_roll_t * deg_to_rad(roll_angle))
+	player_graphic.rotate(Vector3.RIGHT, current_pitch_angle)
 	
-	# update camera
+	# Update camera
 	var right = basis.x.normalized()
 	var up = basis.y.normalized()
-	var fwd = basis.z.normalized()
-
+	var fwd = -basis.z.normalized()
+	
 	camera.position = position + right * cam_offset.x + up * cam_offset.y + fwd * cam_offset.z
 	var cam_look_target = position + right * cam_look_offset.x + up * cam_look_offset.y + fwd * cam_look_offset.z
 	camera.look_at(cam_look_target)
@@ -61,21 +67,23 @@ func handle_inputs(dt):
 	curr_pitch_t = pitch_smooth.x
 	curr_smooth_pitch_vel = pitch_smooth.y
 	
-func get_pitch_input() -> float:
-	var p = 0
-	if Input.is_action_pressed("Up"):
-		p += -1
-	if Input.is_action_pressed("Down"):
-		p += 1
-	return p
-	
-func get_turn_input() -> float:
+func get_turn_input() -> float : 
 	var t = 0
 	if Input.is_action_pressed("Left"):
-		t += -1
+		t += 1
 	if Input.is_action_pressed("Right"):
+		t += -1
+	return t
+	
+func get_pitch_input() -> float : 
+	var t = 0
+	if Input.is_action_pressed("Down"):
+		t += -1
+	if Input.is_action_pressed("Up"):
 		t += 1
 	return t
+	
+
 	
 func smooth_towards(curr, target, duration, curr_velocity, dt) -> Vector2:
 	# from unity smoothdamp implementation

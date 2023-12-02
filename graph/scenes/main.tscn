@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://v2c1xlhyxkjo"]
+[gd_scene load_steps=3 format=3 uid="uid://v2c1xlhyxkjo"]
 
-[ext_resource type="PackedScene" uid="uid://b14funl7ad63b" path="res://scenes/plane.tscn" id="1_a4qlx"]
+[ext_resource type="Script" path="res://scripts/plane.gd" id="1_civ12"]
+[ext_resource type="PackedScene" uid="uid://bqgqkt83kolkc" path="res://art/plane.glb" id="2_rtnop"]
 
 [node name="main" type="Node3D"]
 
-[node name="PlanePlayer" parent="." instance=ExtResource("1_a4qlx")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 0)
+shadow_enabled = true
+
+[node name="player" type="Node3D" parent="." node_paths=PackedStringArray("player_graphic", "camera")]
+script = ExtResource("1_civ12")
+speed = 25.0
+turn_speed = 0.25
+elevation_speed = 15.0
+roll_angle = 35.0
+player_graphic = NodePath("plane")
+camera = NodePath("../Camera3D")
+cam_offset = Vector3(0, 2.5, -5.5)
+cam_look_offset = Vector3(0, 1.1, -1.8)
+
+[node name="plane" parent="player" instance=ExtResource("2_rtnop")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.941306, 0.219666, -0.2563, -0.188952, 0.972074, 0.139173, 0.279714, -0.082576, 0.956525, 0, 11, 26)
