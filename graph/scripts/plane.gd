@@ -29,7 +29,7 @@ func _process(delta):
 	# Update smoothed inputs
 	handle_inputs(delta)
 	# Move
-	var velocity_local = Vector3(0, -curr_pitch_t * elevation_speed, speed)
+	var velocity_local = Vector3(0, curr_pitch_t * elevation_speed, speed)
 	translate_object_local(velocity_local * delta)
 	# Rotate
 	rotate(Vector3(0,-1,0), turn_speed * current_turn_t * delta)
@@ -55,7 +55,7 @@ func handle_inputs(dt):
 	var turn_dir = get_turn_input()
 	var pitch_dir = get_pitch_input()
 	# Smooth turn
-	var turn_smooth = smooth_towards(current_turn_t, turn_dir, 0.2, curr_smooth_turn_vel, dt)
+	var turn_smooth = smooth_towards(current_turn_t, -turn_dir, 0.2, curr_smooth_turn_vel, dt)
 	current_turn_t = turn_smooth.x
 	curr_smooth_turn_vel = turn_smooth.y
 	# Smooth roll
@@ -76,12 +76,12 @@ func get_turn_input() -> float :
 	return t
 	
 func get_pitch_input() -> float : 
-	var t = 0
+	var p = 0
 	if Input.is_action_pressed("Down"):
-		t += -1
+		p += -1
 	if Input.is_action_pressed("Up"):
-		t += 1
-	return t
+		p += 1
+	return p
 	
 
 	
