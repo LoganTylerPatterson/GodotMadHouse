@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/plane.gd" id="1_civ12"]
 [ext_resource type="PackedScene" uid="uid://bqgqkt83kolkc" path="res://art/plane.glb" id="2_rtnop"]
-[ext_resource type="PackedScene" path="res://art/Wuhu Island Blender/Wuhu Island.glb" id="3_6c8xl"]
+[ext_resource type="PackedScene" uid="uid://dplwnuk3yfl11" path="res://art/Wuhu Island Blender/Wuhu Island.glb" id="3_6c8xl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gj3gc"]
 albedo_color = Color(0.172549, 0.321569, 0.180392, 1)
