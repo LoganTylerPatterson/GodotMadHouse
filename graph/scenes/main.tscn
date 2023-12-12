@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://v2c1xlhyxkjo"]
+[gd_scene load_steps=4 format=3 uid="uid://v2c1xlhyxkjo"]
 
 [ext_resource type="Script" path="res://scripts/plane.gd" id="1_civ12"]
 [ext_resource type="PackedScene" uid="uid://bqgqkt83kolkc" path="res://art/plane.glb" id="2_rtnop"]
 [ext_resource type="PackedScene" uid="uid://dplwnuk3yfl11" path="res://art/Wuhu Island Blender/Wuhu Island.glb" id="3_6c8xl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gj3gc"]
-albedo_color = Color(0.172549, 0.321569, 0.180392, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_82mxf"]
 
 [node name="main" type="Node3D"]
 
@@ -19,6 +14,7 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 0)
 shadow_enabled = true
 
 [node name="player" type="Node3D" parent="." node_paths=PackedStringArray("player_graphic", "camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 140, 443)
 script = ExtResource("1_civ12")
 speed = -25.0
 turn_speed = 1.0
@@ -31,10 +27,5 @@ cam_look_offset = Vector3(0, 1.1, -1.8)
 [node name="plane" parent="player" instance=ExtResource("2_rtnop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60988, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, -60.4526, 0)
-material_override = SubResource("StandardMaterial3D_gj3gc")
-mesh = SubResource("PlaneMesh_82mxf")
-
 [node name="Wuhu Island" parent="." instance=ExtResource("3_6c8xl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.124, 0, 3.20714)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -14.124, 0, 3.20714)
