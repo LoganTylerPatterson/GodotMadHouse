@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var point_prefab: PackedScene
-@export var resolution = 10
+@export var resolution = 100
 
 var points = []
 
