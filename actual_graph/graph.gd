@@ -22,8 +22,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var speed = 1.0
+var time = 0
 func _process(delta):
-	var time = Time.get_ticks_msec() / 1000
+	time += delta
 	for point in points:
 		position = point.position
 		position.y = sin(PI * (position.x * time))
