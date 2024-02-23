@@ -27,5 +27,5 @@ func _process(delta):
 	time += delta
 	for point in points:
 		position = point.position
-		position.y = sin(PI * (position.x + time))
+		position.y = GraphFunctions.multiwave(position.x, time)
 		point.position = position

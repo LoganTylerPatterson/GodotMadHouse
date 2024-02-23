@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6nywrvnb5g2u"]
 
-[ext_resource type="Script" path="res://graph.gd" id="1_8xduf"]
+[ext_resource type="Script" path="res://scripts/graph.gd" id="1_8xduf"]
 [ext_resource type="PackedScene" uid="uid://dhvynhv0s7mpl" path="res://point_prefab.tscn" id="2_3o4p1"]
 
 [node name="Node3D" type="Node3D"]
@@ -9,3 +9,6 @@ point_prefab = ExtResource("2_3o4p1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.07)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 4, 6)
