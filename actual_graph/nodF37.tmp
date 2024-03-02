@@ -7,6 +7,9 @@
 script = ExtResource("1_8xduf")
 point_prefab = ExtResource("2_3o4p1")
 resolution = 50
+function = 4
+functionDuration = null
+transitionDuration = null
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.677634, 0.7354, 0, -0.7354, 0.677634, 0.917791, 1.23006, 0.573312)
