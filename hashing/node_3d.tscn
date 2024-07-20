@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi0puoh8yn4nt"]
+
+[ext_resource type="Script" path="res://HashVisualization.gd" id="1_cyn8f"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_cyn8f")
